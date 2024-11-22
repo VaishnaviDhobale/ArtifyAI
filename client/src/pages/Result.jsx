@@ -1,15 +1,35 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { motion } from "framer-motion";
 
 import { assets } from "../assets/assets";
+import { AppContext } from "../context/AppContext";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Result = () => {
   const [image, setImage] = useState(assets.sample_img_1);
   const [isImageLoaded, setIsImageLoaded] = useState(true);
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
+  const {generateImage,credit} = useContext(AppContext);
+  const navigate = useNavigate();
 
-  const onSubmitHandler = async () => {};
+
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    if(input){
+      const image = await generateImage(input);
+      if(image){
+        setIsImageLoaded(true);
+        setImage(image);
+      }else{
+          navigate("/buy")
+      }
+    }
+    setLoading(false)
+  };
   return (
     <motion.form
       onSubmit={onSubmitHandler}

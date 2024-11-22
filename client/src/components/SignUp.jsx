@@ -3,10 +3,65 @@ import { useContext, useEffect, useState } from "react";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 import { motion } from "framer-motion";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const [state, setState] = useState("Login");
-  const {setShowLogin } = useContext(AppContext);
+  const { setShowLogin, backendUrl, setToken, setUser } =
+    useContext(AppContext);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignupForm = async (event) => {
+    event.preventDefault();
+  
+    try {
+      if (state === "Login") {
+
+        // for login 
+        const loginData = await axios.post(`${backendUrl}/api/user/login`, {
+          email,
+          password,
+        });
+  
+        if (loginData.data.success) {
+          setToken(loginData.data.token);
+          setUser(loginData.data.user);
+          localStorage.setItem("token", loginData.data.token);
+          localStorage.setItem("user",loginData.data.user)
+          setShowLogin(false);
+        } else {
+          console.log("Login failed:", loginData.data.message);
+          toast.error(loginData.data.message || "Login failed");
+        }
+      } else {
+        // for registration 
+        const regiData = await axios.post(`${backendUrl}/api/user/register`, {
+          email,
+          password,
+          name,
+        });
+        console.log(regiData);
+  
+        if (regiData.data.success) {
+          console.log("Registration successful");
+          setToken(regiData.data.token); // Ensure it's regiData.data.token
+          setUser(regiData.data.user); // Ensure it's regiData.data.user
+          localStorage.setItem("token", regiData.data.token);
+          setShowLogin(false);
+          console.log("done");
+        } else {
+          console.log("Registration failed:", regiData.data.message);
+          toast.error(regiData.data.message || "Registration failed");
+        }
+      }
+    } catch (error) {
+     toast.error(error?.response?.data?.message || error?.message)
+    }
+  };
+  
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -23,7 +78,10 @@ const SignUp = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
     >
-      <form className="relative bg-white p-10 rounded-xl text-slate-500">
+      <form
+        onSubmit={handleSignupForm}
+        className="relative bg-white p-10 rounded-xl text-slate-500"
+      >
         <h1 className="text-center text-2xl text-neutral-700 font-medium">
           {state}
         </h1>
@@ -37,6 +95,11 @@ const SignUp = () => {
               type="text"
               placeholder="Full Name"
               required
+              name="name"
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              value={name}
             />
           </div>
         ) : null}
@@ -48,6 +111,11 @@ const SignUp = () => {
             type="email"
             placeholder="Email"
             required
+            name="email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            value={email}
           />
         </div>
 
@@ -58,6 +126,11 @@ const SignUp = () => {
             type="password"
             placeholder="Password"
             required
+            name="password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            value={password}
           />
         </div>
 
