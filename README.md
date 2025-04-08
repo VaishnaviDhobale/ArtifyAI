@@ -11,6 +11,7 @@ ArtifyAI is a website where users can enter a text prompt, and based on that inp
 7. Vercel
    
 ## View Project
-<a href="https://artify-ai-azure.vercel.app/" target="_blank" rel="noopener noreferrer">
-  Artify AI (Deployed on Vercel)
-</a>
+[URl](https://artify-ai-azure.vercel.app/) (Deployed on Vercel) 
+
+## Check Out the Slides
+![1]
