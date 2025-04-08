@@ -18,3 +18,13 @@ ArtifyAI is a website where users can enter a text prompt, and based on that inp
 <p align="left">
   <img src="./client/assets/Home.png" width="500" alt="App Screenshot" />
 </p>
+
+**2. Enter Prompt to generate image**
+<p align="left">
+  <img src="./client/assets/Prompt.png.png" width="500" alt="App Screenshot" />
+</p>
+
+**output**
+<p align="left">
+  <img src="./client/assets/output.png.png" width="500" alt="App Screenshot" />
+</p>

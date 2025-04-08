@@ -8,9 +8,8 @@ const Navbar = () => {
     const {user,setShowLogin,logout, credit} = useContext(AppContext)
   return (
     <div className="flex items-center justify-between py-4">
-      <Link to={"/"}>
-        {" "}
-        <img src={assets.logo} alt="" className="w-28 sm:w-32 lg:w-40" />{" "}
+      <Link to={"/"} className={"font-bold text-sky-500 text-3xl"}>
+        ArtifyAI
       </Link>
       <div>
         {/*for logout or login */}
