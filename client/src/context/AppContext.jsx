@@ -6,7 +6,7 @@ export const AppContext = createContext();
 const AppContextProvider = (props) => {
   const [user, setUser] = useState(localStorage.getItem("user"));
   const [showLogin, setShowLogin] = useState(false);
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || "https://artifyai-1.onrender.com";
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [credit, setCredit] = useState(false);
   const navigate = useNavigate()
