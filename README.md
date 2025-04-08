@@ -15,6 +15,6 @@ ArtifyAI is a website where users can enter a text prompt, and based on that inp
 
 ## Check Out the Slides
 **1. Home Page**
-<p align="center">
+<p align="left">
   <img src="./client/assets/Home.png" width="500" alt="App Screenshot" />
 </p>
