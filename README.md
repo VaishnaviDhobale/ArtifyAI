@@ -24,7 +24,7 @@ ArtifyAI is a website where users can enter a text prompt, and based on that inp
   <img src="./client/assets/Prompt.png" width="500" alt="App Screenshot" />
 </p>
 
-**output**
+**3. The output of entered prompt**
 <p align="left">
   <img src="./client/assets/output.png" width="500" alt="App Screenshot" />
 </p>
